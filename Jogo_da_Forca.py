@@ -53,8 +53,11 @@ def categoria_palavras():
         print("Digite uma das categorias existentes")
         entrada = input("Digite a categoria  escolhida: ").lower().strip()
         
+    print(f"Categoria escolhida para o jogo {palvras_categorias[entrada]}\n")    
     return palvras_categorias[entrada]
-            
+  
+def reiniciar_jogo():
+    jogo_da_forca()           
     
 def jogo_da_forca():
     palavras = categoria_palavras()
@@ -84,8 +87,19 @@ def jogo_da_forca():
 
         if "_" not in letras_descobertas:
             exibir_status(chances, letras_descobertas, letras_erradas)
-            print(f"Parabéns, você ganhou! A palavra era '{palavra_escolhida}'.")
-            break
+            print(f"Parabéns, você ganhou! A palavra era '{palavra_escolhida}'.\n")
+            
+            escolha = input("Deseja jogar novamente digite [S] ou sair [N]: ")
+            while escolha not in ["S", "N"]:
+                if isinstance(escolha,str):
+                    if escolha.upper() == "S":
+                        reiniciar_jogo()
+                    elif escolha.upper() == "N":
+                        break
+                    else:
+                        print("escolha invalida")
+                        
+            
 
     if "_" in letras_descobertas:
         print(f"Você perdeu! A palavra era '{palavra_escolhida}'.")
