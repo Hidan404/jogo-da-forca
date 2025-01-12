@@ -12,7 +12,7 @@ def desenhar_forca(chances):
         "------\n|    |\n|    O\n|   /|\\\n|   / \\\n|    ======"
     ]
     
-    print(estagios[10 - chances])
+    print(estagios[7 - chances])
 
 
 def limpar_tela_cli():
@@ -57,21 +57,30 @@ def categoria_palavras():
     return palvras_categorias[entrada]
   
 def reiniciar_jogo():
-    jogo_da_forca()           
+    escolha = input("Deseja jogar novamente digite [S] para continuar, ou sair [N] para encerrar: ")
+    while escolha not in ["S", "N"]:
+        if isinstance(escolha,str):
+            if escolha.upper() == "S":
+                jogo_da_forca()
+            elif escolha.upper() == "N":
+                break
+            else:
+                print("escolha invalida")
+              
     
 def jogo_da_forca():
     palavras = categoria_palavras()
     palavra_escolhida = random.choice(palavras)
     letras_descobertas = ["_" for _ in palavra_escolhida]
     letras_erradas = []
-    chances = 10
+    chances = 7
 
     while chances > 0:
         exibir_status(chances, letras_descobertas, letras_erradas)
         entrada = input("Digite uma letra: ").lower()
 
-        if len(entrada) != 1 or not entrada.isalpha():
-            print("Por favor, digite apenas uma letra.")
+        if len(entrada) != 1 or (not entrada.isalpha() and entrada != " "):
+            print("Por favor, digite apenas uma letra ou espaço.")
             continue
 
         if entrada in letras_descobertas or entrada in letras_erradas:
@@ -88,21 +97,13 @@ def jogo_da_forca():
         if "_" not in letras_descobertas:
             exibir_status(chances, letras_descobertas, letras_erradas)
             print(f"Parabéns, você ganhou! A palavra era '{palavra_escolhida}'.\n")
+            reiniciar_jogo()
             
-            escolha = input("Deseja jogar novamente digite [S] ou sair [N]: ")
-            while escolha not in ["S", "N"]:
-                if isinstance(escolha,str):
-                    if escolha.upper() == "S":
-                        reiniciar_jogo()
-                    elif escolha.upper() == "N":
-                        break
-                    else:
-                        print("escolha invalida")
-                        
-            
+        
 
     if "_" in letras_descobertas:
         print(f"Você perdeu! A palavra era '{palavra_escolhida}'.")
+        reiniciar_jogo()
 
 if __name__ == "__main__":
     jogo_da_forca()
