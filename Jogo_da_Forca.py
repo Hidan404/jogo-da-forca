@@ -3,17 +3,15 @@ import random
 
 def desenhar_forca(chances):
     estagios = [
-        "------\n|    |\n|\n|\n|\n|    ======",
-        "------\n|    |\n|    O\n|\n|\n|    ======",
-        "------\n|    |\n|    O\n|    |\n|\n|    ======",
-        "------\n|    |\n|    O\n|   /|\n|\n|    ======",
-        "------\n|    |\n|    O\n|   /|\\\n|\n|    ======",
-        "------\n|    |\n|    O\n|   /|\\\n|   /\n|    ======",
-        "------\n|    |\n|    O\n|   /|\\\n|   / \\\n|    ======"
+        "------\n|      |\n|\n|\n|\n|      ======",
+        "------\n|      |\n|      O\n|\n|\n|      ======",
+        "------\n|      |\n|      O\n|      |\n|\n|      ======",
+        "------\n|      |\n|      O\n|     /|\n|\n|      ======",
+        "------\n|      |\n|      O\n|     /|\\\n|\n|      ======",
+        "------\n|      |\n|      O\n|     /|\\\n|     /\n|      ======",
+        "------\n|      |\n|      O\n|     /|\\\n|     / \\\n|      ======"
     ]
-    
-    print(estagios[7 - chances])
-
+    print(estagios[6 - chances]) 
 
 def limpar_tela_cli():
     if os.name == "nt":
@@ -47,27 +45,26 @@ def categoria_palavras():
     for categorias in palvras_categorias.keys():
         print(f"Categoria: {categorias}")
         
-    entrada = input("Digite a categria escolhida: ").lower().strip()
+    entrada = input("Digite a categoria escolhida: ").lower().strip()
     
     while entrada not in palvras_categorias.keys():
         print("Digite uma das categorias existentes")
-        entrada = input("Digite a categoria  escolhida: ").lower().strip()
+        entrada = input("Digite a categoria escolhida: ").lower().strip()
         
-    print(f"Categoria escolhida para o jogo {palvras_categorias[entrada]}\n")    
+    print(f"Categoria escolhida para o jogo: {entrada}\n") # Exibe apenas o nome da categoria  
     return palvras_categorias[entrada]
-  
+
 def reiniciar_jogo():
-    escolha = input("Deseja jogar novamente digite [S] para continuar, ou sair [N] para encerrar: ")
-    while escolha not in ["S", "N"]:
-        if isinstance(escolha,str):
-            if escolha.upper() == "S":
-                jogo_da_forca()
-            elif escolha.upper() == "N":
-                break
-            else:
-                print("escolha invalida")
-              
-    
+    while True:
+        escolha = input("Deseja jogar novamente? Digite [S] para continuar ou [N] para encerrar: ").upper()
+        if escolha == "S":
+            jogo_da_forca()
+            break 
+        elif escolha == "N":
+            break
+        else:
+            print("Escolha inválida.")
+
 def jogo_da_forca():
     palavras = categoria_palavras()
     palavra_escolhida = random.choice(palavras)
@@ -93,19 +90,17 @@ def jogo_da_forca():
             chances -= 1
             letras_erradas.append(entrada)
             print("Ops! Essa letra não está na palavra.")
+            
 
         if "_" not in letras_descobertas:
             exibir_status(chances, letras_descobertas, letras_erradas)
             print(f"Parabéns, você ganhou! A palavra era '{palavra_escolhida}'.\n")
-            reiniciar_jogo()
-            
-        
-
+            break 
+    
     if "_" in letras_descobertas:
-        print(f"Você perdeu! A palavra era '{palavra_escolhida}'.")
-        reiniciar_jogo()
+        print(f"voce perdeu! a palavra era {palavra_escolhida}")
+        
+    reiniciar_jogo()  # Chamada única fora do loop
 
 if __name__ == "__main__":
     jogo_da_forca()
-  
-     
