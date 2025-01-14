@@ -51,7 +51,7 @@ def categoria_palavras():
         print("Digite uma das categorias existentes")
         entrada = input("Digite a categoria escolhida: ").lower().strip()
         
-    print(f"Categoria escolhida para o jogo: {entrada}\n") # Exibe apenas o nome da categoria  
+    print(f"Categoria escolhida para o jogo: {entrada}\n") 
     return palvras_categorias[entrada]
 
 def reiniciar_jogo():
