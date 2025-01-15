@@ -60,12 +60,12 @@ class Jogo_da_forca():
         print(f"Categoria escolhida para o jogo: {entrada}\n") 
         return entrada  
 
-    def reiniciar_jogo(self):  # <<<--- MUDANÇA AQUI
+    def reiniciar_jogo(self): 
         while True:
             escolha = input("Deseja jogar novamente? Digite [S] para continuar ou [N] para encerrar: ").upper()
             if escolha == "S":
-                self.categoria = self.escolher_categoria()  # <<<--- MUDANÇA AQUI
-                self.palavras = self.palvras_categorias[self.categoria]  # <<<--- MUDANÇA AQUI
+                self.categoria = self.escolher_categoria() 
+                self.palavras = self.palvras_categorias[self.categoria]  
                 self.iniciar_jogo()
                 break 
             elif escolha == "N":
