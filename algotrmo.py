@@ -9,11 +9,16 @@ while numero > 0:
 print(soma)    '''
 
 
-numero = int(input('digite: '))
+'''numero = int(input('digite: '))
 qtd = 1
 while abs(numero) >= 10:
     numero = numero / 10
     qtd+= 1
 
 
-print(qtd)  
+print(qtd) ''' 
+
+
+fruits = ['apple', 'banana', 'cherry']
+for fruit in fruits:
+    print(fruit)
